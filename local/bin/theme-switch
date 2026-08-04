@@ -8,7 +8,9 @@ trap '' TERM HUP
 
 TD="$HOME/.config/themes"
 LOG="$HOME/.cache/theme-switch.log"
-themes=($(find "$TD" -mindepth 1 -maxdepth 1 -type d ! -name current -printf '%f\n' | sort))
+# -L: $TD is itself a symlink when deployed from the dotfiles repo, and find
+# won't descend into it otherwise.
+themes=($(find -L "$TD" -mindepth 1 -maxdepth 1 -type d ! -name current -printf '%f\n' | sort))
 
 current="$(basename "$(readlink -f "$TD/current" 2>/dev/null || echo none)")"
 
