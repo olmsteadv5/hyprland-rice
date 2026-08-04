@@ -1,0 +1,9 @@
+layout=~/.config/wlogout/layout
+style=~/.config/wlogout/style.css
+buttons-per-row=1
+column-spacing=0
+row-spacing=0
+margin-top=5
+margin-right=5
+margin-bottom=0
+margin-left=0

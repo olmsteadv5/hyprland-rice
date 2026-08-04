@@ -1,0 +1,31 @@
+/* colors */
+/* macOS Dark — monochrome black/white/grey, minimal accents */
+@define-color lightbg   #f5f5f7;
+@define-color bg        #1c1c1e;
+@define-color fglight   #1d1d1f;
+@define-color bg1       #2c2c2e;
+@define-color bg2       #3a3a3c;
+@define-color bg3       #48484a;
+@define-color bg4       #636366;
+@define-color fg        #f5f5f7;
+@define-color red       #ff453a;
+@define-color green     #98989d;
+@define-color yellow    #d1d1d6;
+@define-color blue      #0a84ff;
+@define-color purple    #98989d;
+@define-color aqua      #98989d;
+@define-color gray      #98989d;
+@define-color brgray    #8e8e93;
+@define-color brred     #ff6961;
+@define-color brgreen   #aeaeb2;
+@define-color bryellow  #ffffff;
+@define-color brblue    #409cff;
+@define-color brpurple  #aeaeb2;
+@define-color braqua    #aeaeb2;
+@define-color orange    #d1d1d6;
+@define-color brorange  #ffffff;
+@define-color tooltipbg rgba(28, 28, 30, 0.8);
+
+/* Accent roles (yellow/bryellow slots) are light grey/white here;
+   green (battery-ok) is deliberately grey to keep the bar monochrome.
+   Red stays red for critical states only; blue is the sole color accent. */

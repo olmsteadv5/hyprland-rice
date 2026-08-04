@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+# theme-switch — system-wide theme switcher
+# Themes live in ~/.config/themes/<name>/; "current" symlink tracks the active one.
+# NOTE: invoked from waybar's on-click — must survive waybar's own reload,
+# hence the TERM/HUP traps and waybar being reloaded dead last.
+set -uo pipefail
+trap '' TERM HUP
+
+TD="$HOME/.config/themes"
+LOG="$HOME/.cache/theme-switch.log"
+themes=($(find "$TD" -mindepth 1 -maxdepth 1 -type d ! -name current -printf '%f\n' | sort))
+
+current="$(basename "$(readlink -f "$TD/current" 2>/dev/null || echo none)")"
+
+case "${1:-}" in
+  --list)
+    for t in "${themes[@]}"; do
+      [[ "$t" == "$current" ]] && echo "* $t" || echo "  $t"
+    done
+    exit 0
+    ;;
+  --current)
+    echo "$current"; exit 0
+    ;;
+  --next)
+    next="${themes[0]}"
+    for i in "${!themes[@]}"; do
+      if [[ "${themes[$i]}" == "$current" ]]; then
+        next="${themes[$(( (i + 1) % ${#themes[@]} ))]}"
+      fi
+    done
+    target="$next"
+    ;;
+  "")
+    echo "usage: theme-switch <name>|--next|--list|--current" >&2; exit 1
+    ;;
+  *)
+    target="$1"
+    [[ -d "$TD/$target" ]] || { echo "no such theme: $target" >&2; exit 1; }
+    ;;
+esac
+
+T="$TD/$target"
+echo "$(date '+%F %T') switching to $target" > "$LOG"
+ln -sfn "$T" "$TD/current"
+source "$T/theme.env"
+
+### Phase 1 — write every file first (no reloads yet) ###
+
+cp "$T/gtk-colors.css" "$HOME/.config/waybar/colors.css"
+cp "$T/gtk-colors.css" "$HOME/.config/swaync/colors.css"
+cp "$T/wofi-style.css" "$HOME/.config/wofi/style.css"
+cp "$T/kitty-colors.conf" "$HOME/.config/kitty/theme-colors.conf"
+cp "$T/hypr-colors.conf" "$HOME/.config/hypr/theme-colors.conf"
+[[ -f "$T/starship.toml" ]] && cp "$T/starship.toml" "$HOME/.config/starship.toml"
+
+sed -i "s/^color_theme = .*/color_theme = \"$BTOP_THEME\"/" "$HOME/.config/btop/btop.conf"
+sed -i "s/^theme \".*\"/theme \"$ZELLIJ_THEME\"/" "$HOME/.config/zellij/config.kdl"
+
+# zed: only if the theme's required extension is installed (or none required)
+if [[ -z "$ZED_REQUIRES_EXT" ]] || ls "$HOME/.local/share/zed/extensions/installed/"*"$ZED_REQUIRES_EXT"* >/dev/null 2>&1; then
+  python3 - "$ZED_DARK" "$ZED_LIGHT" <<'EOF' || true
+import re, sys, pathlib
+# settings.json is JSONC (may contain comments) — regex-edit the theme block only
+p = pathlib.Path.home() / ".config/zed/settings.json"
+s = p.read_text()
+dark, light = sys.argv[1].strip('"'), sys.argv[2].strip('"')
+s = re.sub(r'("theme"\s*:\s*\{[^}]*"dark"\s*:\s*")[^"]*(")', r'\g<1>' + dark + r'\g<2>', s, count=1)
+s = re.sub(r'("theme"\s*:\s*\{[^}]*"light"\s*:\s*")[^"]*(")', r'\g<1>' + light + r'\g<2>', s, count=1)
+p.write_text(s)
+EOF
+fi
+echo "files written" >> "$LOG"
+
+### Phase 2 — reload running apps; waybar last (it may kill our parent) ###
+
+hyprctl reload >/dev/null 2>&1 || true
+pkill -SIGUSR1 -x kitty 2>/dev/null || true
+swaync-client -rs >/dev/null 2>&1 || true
+notify-send -a theme-switch "Theme switched" "$target" 2>/dev/null || true
+echo "reloads done, restarting waybar" >> "$LOG"
+
+pkill -SIGUSR2 -x waybar 2>/dev/null || true
+echo "done: $target" >> "$LOG"
+echo "theme: $target"

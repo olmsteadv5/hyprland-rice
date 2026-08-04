@@ -1,0 +1,51 @@
+{
+  "positionX": "right",
+  "positionY": "top",
+  "layer": "overlay",
+  "control-center-layer": "overlay",
+  "layer-shell": true,
+  "cssPriority": "application",
+  "control-center-margin-top": 8,
+  "control-center-margin-bottom": 8,
+  "control-center-margin-right": 0,
+  "control-center-margin-left": 0,
+  "notification-margin-top": 8,
+  "notification-2fa-action": true,
+  "notification-inline-replies": false,
+  "notification-icon-size": 40,
+  "notification-body-image-height": 120,
+  "notification-body-image-width": 240,
+  "notification-body-markup": "strip",
+  "timeout": 8,
+  "timeout-low": 5,
+  "timeout-critical": 0,
+  "fit-to-screen": false,
+  "control-center-width": 400,
+  "control-center-height": 640,
+  "notification-window-width": 390,
+  "keyboard-shortcuts": true,
+  "image-visibility": "when-available",
+  "transition-time": 100,
+  "hide-on-clear": false,
+  "hide-on-action": true,
+  "script-fail-notify": false,
+  "widgets": ["title", "dnd", "notifications"],
+  "widget-config": {
+    "title": {
+      "text": "Notifications",
+      "clear-all-button": true,
+      "button-text": "Clear All"
+    },
+    "dnd": {
+      "text": "Do Not Disturb"
+    },
+    "label": {
+      "max-lines": 1,
+      "text": ""
+    },
+    "mpris": {
+      "image-size": 56,
+      "image-radius": 8
+    }
+  }
+}

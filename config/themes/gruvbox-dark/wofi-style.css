@@ -1,0 +1,86 @@
+/* Gruvbox Dark — matches Waybar theme
+   Translucent background; Hyprland layerrule blurs behind it. */
+
+window {
+    margin: 0;
+    border: 1px solid rgba(102, 92, 84, 0.9); /* @bg3 */
+    background-color: rgba(40, 40, 40, 0.82);  /* @bg, translucent for blur */
+    border-radius: 12px;                        /* matches waybar */
+    font-family: "Noto Sans Mono", monospace;
+    font-size: 14px;
+}
+
+#outer-box {
+    background-color: transparent;
+    padding: 12px;
+}
+
+#input {
+    margin: 0 0 10px 0;
+    border: 1px solid rgba(102, 92, 84, 0.6);  /* @bg3 */
+    outline: none;
+    color: #ebdbb2;                            /* @fg */
+    background-color: rgba(60, 56, 54, 0.85);  /* @bg1 */
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 15px;
+}
+
+#input:focus {
+    border: 1px solid #d79921;                 /* @yellow — matches workspace hover */
+}
+
+#input image {
+    color: #a89984;                            /* @gray — search/clear icons */
+}
+
+#scroll {
+    margin: 0;
+}
+
+#inner-box {
+    background-color: transparent;
+}
+
+#img {
+    margin-right: 10px;
+}
+
+#text {
+    color: #ebdbb2;                            /* @fg */
+}
+
+#entry {
+    padding: 8px 10px;
+    margin: 1px 0;
+    border-radius: 8px;
+    background-color: transparent;
+}
+
+#entry:hover {
+    background-color: rgba(80, 73, 69, 0.5);   /* @bg2 */
+}
+
+#entry:selected {
+    background-color: rgba(215, 153, 33, 0.22); /* @yellow wash */
+}
+
+#entry:selected #text {
+    color: #fabd2f;                            /* @bryellow — accent, matches hover */
+    font-weight: bold;
+}
+
+/* App name label (if showing drun with two lines) */
+#entry #text.title {
+    color: #ebdbb2;                            /* @fg */
+    font-weight: bold;
+}
+
+#entry:selected #text.title {
+    color: #fabd2f;                            /* @bryellow */
+}
+
+#entry #text.description {
+    color: #a89984;                            /* @gray */
+    font-size: 12px;
+}

@@ -1,70 +1,16 @@
-/* colors */
-/* Gruvbox Dark */
-@define-color lightbg   #fbf1c7;
-@define-color bg        #282828;
-@define-color fglight   #282828;
-@define-color bg1       #3c3836;
-@define-color bg2       #504945;
-@define-color bg3       #665c54;
-@define-color bg4       #7c6f64;
-@define-color fg        #ebdbb2;
-@define-color red       #cc241d;
-@define-color green     #98971a;
-@define-color yellow    #d79921;
-@define-color blue      #458588;
-@define-color purple    #b16286;
-@define-color aqua      #689d6a;
-@define-color gray      #a89984;
-@define-color brgray    #928374;
-@define-color brred     #fb4934;
-@define-color brgreen   #b8bb26;
-@define-color bryellow  #fabd2f;
-@define-color brblue    #83a598;
-@define-color brpurple  #d3869b;
-@define-color braqua    #8ec07c;
-@define-color orange    #d65d0e;
-@define-color brorange  #fe8019;
-@define-color tooltipbg rgba(40, 40, 40, 0.8);
-
-/* Gruvbox Light */
-/*
-@define-color bg        #fbf1c7;
-@define-color fglight   #fbf1c7;
-@define-color bg1       #ebdbb2;
-@define-color bg2       #d5c4a1;
-@define-color bg3       #bdae93;
-@define-color bg4       #a89984;
-@define-color fg        #3c3836;
-@define-color red       #cc241d;
-@define-color green     #98971a;
-@define-color yellow    #d79921;
-@define-color blue      #458588;
-@define-color purple    #b16286;
-@define-color aqua      #689d6a;
-@define-color gray      #7c6f64;
-@define-color brgray    #928374;
-@define-color brred     #9d0006;
-@define-color brgreen   #79740e;
-@define-color bryellow  #b57614;
-@define-color brblue    #076678;
-@define-color brpurple  #8f3f71;
-@define-color braqua    #427b58;
-@define-color orange    #d65d0e;
-@define-color brorange  #af3a03;
-@define-color tooltipbg rgba(251, 241, 199, 0.8);
-*/
+@import url("colors.css");
 
 * {
     font-size: 14px;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
 tooltip {
     font-family:
-        Iosevka Nerd Font Propo,
+        Noto Sans Mono,
         monospace;
     background-color: @tooltipbg;
-    border-radius: 5px;
+    border-radius: 8px;
     border: 1px solid @bg3;
     padding: 2px 4px;
 }
@@ -78,7 +24,7 @@ tooltip label {
 
 window#waybar {
     font-family:
-        Iosevka Nerd Font Propo,
+        Noto Sans Mono,
         monospace;
     background-color: transparent;
     border-bottom: 0px;
@@ -96,6 +42,17 @@ window#waybar.empty #window {
     padding: 0;
 }
 
+tooltip {
+    background: rgba(40, 40, 40, 0.95);
+    border: 1px solid #665c54;
+    border-radius: 8px;
+}
+
+tooltip label {
+    font-family: "Noto Sans Mono", "Courier New", monospace;
+    font-size: 14px;
+    color: #ebdbb2;
+}
 /*
 window#waybar.empty {
     background-color: transparent;
@@ -140,15 +97,15 @@ button:hover {
 }
 
 #workspaces button:first-child {
-    border-radius: 5px 0 0 5px;
+    border-radius: 8px 0 0 8px;
 }
 
 #workspaces button:last-child {
-    border-radius: 0 5px 5px 0;
+    border-radius: 0 8px 8px 0;
 }
 
 #workspaces button:first-child:last-child {
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
 #workspaces button:hover {
@@ -183,7 +140,9 @@ button:hover {
 #custom-date,
 #custom-weather,
 #custom-notification,
+#custom-theme,
 #custom-power,
+#custom-hotspot,
 #load {
     padding: 0 10px;
     background-color: @bg;
@@ -252,7 +211,7 @@ button:hover {
     padding: 0 10px;
     background-color: @fg;
     color: @bg1;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
 #mpris.paused {
@@ -263,3 +222,48 @@ button:hover {
 #tray menu {
     font-family: sans-serif;
 }
+/* ===========================================================================
+   Append to ~/.config/waybar/style.css  (Gruvbox, matches your SwayNC theme)
+   =========================================================================== */
+
+#custom-kdeconnect-media,
+#custom-kdeconnect {
+  padding: 0 8px;
+  margin: 0 2px;
+  font-family: "Noto Sans Mono", monospace;
+}
+
+/* handoff button — only visible while something is playing */
+#custom-kdeconnect-media.active        { color: #83a598; }  /* bright blue   */
+#custom-kdeconnect-media.active:hover  { color: #8ec07c; }  /* bright aqua   */
+
+/* connection indicator states */
+#custom-kdeconnect.connected { color: #b8bb26; }  /* bright green  */
+#custom-kdeconnect.offline   { color: #fabd2f; }  /* bright yellow */
+#custom-kdeconnect.none      { color: #928374; }  /* gray          */
+#custom-kdeconnect:hover     { color: #d3869b; }  /* bright purple */
+/* ===========================================================================
+   Append to ~/.config/waybar/style.css  (Gruvbox, matches your SwayNC theme)
+   =========================================================================== */
+
+#custom-kdeconnect-media,
+#custom-kdeconnect {
+  padding: 0 8px;
+  margin: 0 2px;
+  font-family: "Noto Sans Mono", monospace;
+}
+
+/* handoff button — only visible while something is playing */
+#custom-kdeconnect-media.active        { color: #83a598; }  /* bright blue   */
+#custom-kdeconnect-media.active:hover  { color: #8ec07c; }  /* bright aqua   */
+
+/* connection indicator states */
+#custom-kdeconnect.connected { color: #b8bb26; }  /* bright green  */
+#custom-kdeconnect.offline   { color: #fabd2f; }  /* bright yellow */
+#custom-kdeconnect.none      { color: #928374; }  /* gray          */
+#custom-kdeconnect:hover     { color: #d3869b; }  /* bright purple */
+
+/* wifi hotspot toggle (custom/hotspot) */
+#custom-hotspot.on    { color: #b8bb26; }  /* bright green */
+#custom-hotspot.off   { color: #928374; }  /* gray         */
+#custom-hotspot:hover { color: #8ec07c; }  /* bright aqua  */

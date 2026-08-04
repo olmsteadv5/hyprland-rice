@@ -1,0 +1,26 @@
+* {
+    background: transparent;
+}
+
+window {
+    background: transparent;
+}
+
+button {
+    background: rgba(40, 40, 40, 0.8);
+    color: #ebdbb2;
+    border: 1px solid #504945;
+    border-radius: 8px;
+    padding: 2px 4px 6px;
+    margin: 1px;
+    font-size: 14px;
+    font-family: "Noto Sans";
+    min-width: 60px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+button:hover,
+button:focus {
+    background: #3c3836;
+    color: #d79921;
+}
