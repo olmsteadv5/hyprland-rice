@@ -1,5 +1,4 @@
-/* macOS Dark — Spotlight-like launcher
-   Translucent grey glass; Hyprland layerrule blurs behind it. */
+/* decision: Spotlight-style translucent grey, Hyprland's layerrule blurs behind it */
 
 window {
     margin: 0;
@@ -71,7 +70,7 @@ window {
     font-weight: bold;
 }
 
-/* App name label (if showing drun with two lines) */
+/* explainer: app name label when drun shows two lines */
 #entry #text.title {
     color: #f5f5f7;
     font-weight: bold;

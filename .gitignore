@@ -1,13 +1,12 @@
-# Machine state, not content — install.sh recreates this
+# decision: machine state, install.sh recreates it
 config/themes/current
 
-# Editor/tool scratch that lands inside tracked config dirs
+# explainer: editor and tool scratch inside tracked dirs
 config/micro/backups/
 config/micro/buffers/
 config/micro/settings.json.bak
 config/fish/fish_variables
 
-# Generic
 *.bak
 *.bak-*
 *.save

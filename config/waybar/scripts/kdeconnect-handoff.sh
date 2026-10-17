@@ -1,23 +1,12 @@
 #!/usr/bin/env bash
-# KDE Connect link handoff for Waybar.
-#
-#   status -> Waybar JSON; shows the icon whenever your phone is reachable.
-#   send   -> LAPTOP -> PHONE. Grabs the current browser tab's URL (or the
-#             actively-playing media's URL) and opens it on the phone.
-#   pull   -> PHONE -> LAPTOP. Opens whatever link is in your clipboard
-#             (synced from the phone) in your default browser.
-#
-# Why two directions instead of auto-detect: KDE Connect's media protocol
-# never transmits the source URL of what's playing on the phone, so the laptop
-# can't read it to pull a video automatically. Pushing is reliable; pulling is
-# done via clipboard sync. Left-click = push, right-click = pull.
-#
-# Deps: kdeconnect-cli, playerctl, wtype, wl-clipboard, hyprctl, libnotify.
+# explainer: status = waybar JSON, send = push this tab or media URL to the phone, pull = open the clipboard link here
+# decision: two directions, no auto-detect. KDE Connect never sends the URL of what the phone plays, so pull goes through clipboard sync
+# explainer: needs kdeconnect-cli, playerctl, wtype, wl-clipboard, hyprctl, libnotify
 
 set -uo pipefail
 
-DEVICE_NAME="${KDECONNECT_DEVICE:-}"   # set to your phone's exact name if >1 device
-ICON=""                               # nf-fa-exchange  U+F0EC
+DEVICE_NAME="${KDECONNECT_DEVICE:-}"   # explainer: your phone's exact name if you have more than one
+ICON=""                               # explainer: nf-fa-exchange U+F0EC
 BROWSER_CLASSES="firefox|zen|chrome|chromium|brave|vivaldi|librewolf|edge|mullvad"
 
 json_escape() { local s="$1"
@@ -44,7 +33,7 @@ append_ts() { local u="$1" p="$2"
   esac
 }
 
-# 1) a locally-playing player (not the phone) that exposes a real URL
+# explainer: first try a local player (not the phone) that exposes a real URL
 url_from_player() {
   local p u st pos
   while read -r p; do
@@ -59,7 +48,7 @@ url_from_player() {
   return 1
 }
 
-# 2) fall back to the focused browser's address bar (Ctrl+L, Ctrl+C)
+# explainer: fallback, copy the focused browser's address bar with Ctrl+L Ctrl+C
 url_from_addressbar() {
   command -v wtype >/dev/null 2>&1 || return 1
   local cls; cls="$(hyprctl activewindow 2>/dev/null \

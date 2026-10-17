@@ -143,6 +143,7 @@ button:hover {
 #custom-theme,
 #custom-power,
 #custom-hotspot,
+#custom-fans,
 #load {
     padding: 0 10px;
     background-color: @bg;
@@ -222,10 +223,6 @@ button:hover {
 #tray menu {
     font-family: sans-serif;
 }
-/* ===========================================================================
-   Append to ~/.config/waybar/style.css  (Gruvbox, matches your SwayNC theme)
-   =========================================================================== */
-
 #custom-kdeconnect-media,
 #custom-kdeconnect {
   padding: 0 8px;
@@ -233,19 +230,14 @@ button:hover {
   font-family: "Noto Sans Mono", monospace;
 }
 
-/* handoff button — only visible while something is playing */
+/* explainer: handoff button, only shows while something plays */
 #custom-kdeconnect-media.active        { color: #83a598; }  /* bright blue   */
 #custom-kdeconnect-media.active:hover  { color: #8ec07c; }  /* bright aqua   */
 
-/* connection indicator states */
 #custom-kdeconnect.connected { color: #b8bb26; }  /* bright green  */
 #custom-kdeconnect.offline   { color: #fabd2f; }  /* bright yellow */
 #custom-kdeconnect.none      { color: #928374; }  /* gray          */
 #custom-kdeconnect:hover     { color: #d3869b; }  /* bright purple */
-/* ===========================================================================
-   Append to ~/.config/waybar/style.css  (Gruvbox, matches your SwayNC theme)
-   =========================================================================== */
-
 #custom-kdeconnect-media,
 #custom-kdeconnect {
   padding: 0 8px;
@@ -253,11 +245,10 @@ button:hover {
   font-family: "Noto Sans Mono", monospace;
 }
 
-/* handoff button — only visible while something is playing */
+/* explainer: handoff button, only shows while something plays */
 #custom-kdeconnect-media.active        { color: #83a598; }  /* bright blue   */
 #custom-kdeconnect-media.active:hover  { color: #8ec07c; }  /* bright aqua   */
 
-/* connection indicator states */
 #custom-kdeconnect.connected { color: #b8bb26; }  /* bright green  */
 #custom-kdeconnect.offline   { color: #fabd2f; }  /* bright yellow */
 #custom-kdeconnect.none      { color: #928374; }  /* gray          */

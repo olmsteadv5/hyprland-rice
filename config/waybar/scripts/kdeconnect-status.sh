@@ -1,17 +1,12 @@
 #!/usr/bin/env bash
-# KDE Connect connection indicator + force-connect for Waybar.
-#   status  -> Waybar JSON: connected / paired-but-offline / none.
-#   connect -> force a network rescan + reconnect, then ping the device.
-#
-# Bind on-click to "connect" to brute-force a reconnection.
-# Deps: kdeconnect-cli, libnotify (notify-send).
-# Icons are Nerd Font glyphs (Font Awesome). Swap them if you see boxes.
+# explainer: status = connected / paired-but-offline / none, connect = rescan, reconnect, ping
+# explainer: needs kdeconnect-cli and libnotify. Nerd Font glyphs, swap them if you see boxes
 
 set -uo pipefail
 
 DEVICE_NAME="${KDECONNECT_DEVICE:-}"
-ICON_ON=""       # nf-fa-mobile        U+F10B
-ICON_OFF=""      # nf-fa-chain_broken  U+F127
+ICON_ON=""       # explainer: nf-fa-mobile U+F10B
+ICON_OFF=""      # explainer: nf-fa-chain_broken U+F127
 
 json_escape() {
   local s="$1"

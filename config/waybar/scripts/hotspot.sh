@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# Waybar module for the NetworkManager "Hotspot" connection (see custom/hotspot in config.jsonc).
-#   status → JSON state for waybar   toggle → start/stop the hotspot
+# explainer: status prints waybar JSON, toggle starts/stops the NetworkManager Hotspot connection
 
 CON="Hotspot"
 

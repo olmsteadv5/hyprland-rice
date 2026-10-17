@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
-# install.sh — symlink this repo into place.
-#
-# Every target is backed up to ~/.dotfiles-backup/<timestamp>/ before being
-# replaced, so running this on a machine that already has configs is safe.
-# Re-running is idempotent: links we already own are left alone.
+# decision: back up whatever's already there to ~/.dotfiles-backup/<timestamp>/, re-runs leave our own links alone
 set -euo pipefail
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -16,7 +12,6 @@ DRY_RUN=0
 link() {
     local src="$1" dest="$2"
 
-    # Already pointing at us — nothing to do.
     if [[ -L "$dest" && "$(readlink -f "$dest")" == "$(readlink -f "$src")" ]]; then
         printf '  ok    %s\n' "${dest/#$HOME/\~}"
         return
@@ -27,7 +22,7 @@ link() {
         return
     fi
 
-    # Anything else living there gets moved aside, not deleted.
+    # decision: move aside, never delete
     if [[ -e "$dest" || -L "$dest" ]]; then
         mkdir -p "$BACKUP/$(dirname "${dest#$HOME/}")"
         mv "$dest" "$BACKUP/${dest#$HOME/}"
@@ -39,9 +34,7 @@ link() {
     printf '  link  %s\n' "${dest/#$HOME/\~}"
 }
 
-# These directories hold files we don't own — fish's generated fish_variables,
-# GTK bookmarks, micro's buffers. Linking the whole directory would displace
-# them, so their contents get linked one entry at a time instead.
+# decision: these dirs hold files we don't own (fish_variables, GTK bookmarks, micro buffers), so link their contents one by one
 MERGE_DIRS=(fish micro gtk-3.0)
 
 is_merge_dir() {
@@ -69,8 +62,7 @@ for path in "$REPO"/local/bin/*; do
     link "$path" "$HOME/.local/bin/$(basename "$path")"
 done
 
-# theme-switch resolves the active theme through this symlink; it is per-machine
-# state rather than content, so it is created here instead of being committed.
+# explainer: theme-switch finds the active theme through this link. machine state, so it's made here, not committed
 echo "==> active theme"
 if [[ -L "$HOME/.config/themes/current" ]]; then
     printf '  ok    themes/current -> %s\n' "$(basename "$(readlink -f "$HOME/.config/themes/current")")"
