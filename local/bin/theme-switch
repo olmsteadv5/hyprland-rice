@@ -50,7 +50,7 @@ cp "$T/gtk-colors.css" "$HOME/.config/waybar/colors.css"
 cp "$T/gtk-colors.css" "$HOME/.config/swaync/colors.css"
 cp "$T/wofi-style.css" "$HOME/.config/wofi/style.css"
 cp "$T/kitty-colors.conf" "$HOME/.config/kitty/theme-colors.conf"
-cp "$T/hypr-colors.conf" "$HOME/.config/hypr/theme-colors.conf"
+cp "$T/hypr-colors.lua" "$HOME/.config/hypr/theme-colors.lua"
 [[ -f "$T/starship.toml" ]] && cp "$T/starship.toml" "$HOME/.config/starship.toml"
 
 sed -i "s/^color_theme = .*/color_theme = \"$BTOP_THEME\"/" "$HOME/.config/btop/btop.conf"

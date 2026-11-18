@@ -15,7 +15,7 @@ cd ~/dotfiles
 
 After that:
 
-1. Fix the monitor lines at the top of `config/hypr/hyprland.conf` for your outputs (`hyprctl monitors`). Mine is a 2560x1600 laptop panel with an ultrawide to its right, and `config/hypr/monitor-handler.sh` redoes that layout on hotplug. Waybar has no output set, so it shows on every monitor.
+1. Fix the `hl.monitor` lines at the top of `config/hypr/hyprland.lua` for your outputs (`hyprctl monitors`). Mine is a 2560x1600 laptop panel with an ultrawide to its right, and `config/hypr/monitor-handler.sh` redoes that layout on hotplug. Waybar has no output set, so it shows on every monitor.
 2. The brightness keys use `brightnessctl -d amdgpu_bl1`. Check `brightnessctl -l` for yours (usually `intel_backlight` on Intel).
 3. Log into Hyprland and run `theme-switch gruvbox-dark` once.
 
@@ -47,11 +47,11 @@ theme-switch --next
 theme-switch macos-dark
 ```
 
-To add one, copy `config/themes/gruvbox-dark`, change the colors, and it joins the rotation. `waybar/colors.css`, `wofi/style.css`, `kitty/theme-colors.conf`, `hypr/theme-colors.conf` and `starship.toml` get overwritten on every switch, so edit the theme folder instead.
+To add one, copy `config/themes/gruvbox-dark`, change the colors, and it joins the rotation. `waybar/colors.css`, `wofi/style.css`, `kitty/theme-colors.conf`, `hypr/theme-colors.lua` and `starship.toml` get overwritten on every switch, so edit the theme folder instead.
 
 ## Keys
 
-`SUPER` is the mod key, the full list is in `config/hypr/hyprland.conf`.
+`SUPER` is the mod key, the full list is in `config/hypr/hyprland.lua`.
 
 | Key | Action |
 |---|---|

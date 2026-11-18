@@ -85,7 +85,7 @@ cat <<'EOF'
 
 Done. Remaining manual steps:
 
-  1. Edit ~/.config/hypr/hyprland.conf — the monitor= lines and the
+  1. Edit ~/.config/hypr/hyprland.lua — the hl.monitor lines and the
      brightnessctl device (amdgpu_bl1) are specific to my laptop.
   2. Install the dependencies listed in the README, then log into Hyprland.
   3. Apply the theme once everything is running:  theme-switch gruvbox-dark
